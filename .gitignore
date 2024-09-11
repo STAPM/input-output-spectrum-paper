@@ -4,6 +4,7 @@
 .Ruserdata
 *.qmd
 *.docx
+*.jpg
 *.pdf
 *.xlsx
 *.csl
