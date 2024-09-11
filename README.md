@@ -1,0 +1,79 @@
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+# Modelling the economic effects of reducing the demand for unhealthy commodities: An input-output approach - code and data repository
+
+<!-- badges: start -->
+
+[![Project Status: Active – The project has reached a stable, usable
+state and is being actively
+developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![Lifecycle:
+maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+<!-- badges: end -->
+
+## Introduction
+
+The purpose of this repository is to provide reproducible code and data
+inputs to produce the results of the paper “Modelling the economic
+effects of reducing the demand for unhealthy commodities: An
+input-output approach”
+
+## Data Requirements
+
+All data inputs required are available as part of the R package
+`cdohio.mod`, which is open source and available on GitHub
+[here](https://github.com/STAPM/cdohio.mod).
+
+## Usage
+
+Fork the project on GitHub to create your own repository. This project
+uses `renv` to aid reproducibility of results by ensuring users make use
+of the same environment.
+
+When a new user first launches in this project, `renv` should
+automatically bootstrap itself, thereby downloading and installing the
+appropriate version of `renv` into the project library. After this has
+completed, they can then use `renv::restore()` to install the project
+library locally on their machine.
+
+Once the project library is restored, the repository is ready to be used
+to replicate the analysis once the requirements below are met.
+
+The R scripts which reproduce the analysis are stored in the `src/`
+directory. The script `run_analyses.R` in the top level of the
+repository is a meta-file which runs all of the R scripts in order. The
+key outputs are saved to `outputs/`.
+
+## Reproducibility
+
+Note that this repository uses the `renv` R package to produce a
+reproducible environment for this analysis. see the [package
+website](https://rstudio.github.io/renv/articles/renv.html) for more
+information.
+
+When first launching the project, the function `renv::restore()` will
+populate the `renv/library` folder, installing the R packages saved in
+the lockfifle.
+
+The lockfile `renv.lock` is in the top level of the repository, and
+contains the metadata for all R packages used in the project. The
+libraries themselves are ignored by git and not uploaded to GitHub, and
+so a new user needs to install the packages themselves using the
+metadata.
+
+The .Rprofile file in the top level of the repository is automatically
+run when the project is opened and this runs the script file
+`renv/activate.R` to set the renv folder as the source R package
+library.
+
+The version of R used to produce the analysis is 4.4.1.
+
+## Citation
+
+Please cite this repository using:
+
+Morris D., Gillespie D., James M., Breeze P., Brennan A. Modelling the
+economic effects of reducing the demand for unhealthy commodities: An
+input-output approach - code and data repository; 2024. Open Science
+Framework. URL: <https://osf.io/adb8g/> DOI: 10.17605/OSF.IO/ADB8G
