@@ -86,17 +86,21 @@ sa1_result[, policy := factor(policy,
                               levels = c("alcohol","tobacco","food","gambling"),
                               labels = c("(1) alcohol", "(2) tobacco", "(3) food", "(4) gambling"))]
 
+sa1_result[, prop := pct/100]
+
 ggplot(sa1_result) +
-  aes(x = reallocation_rate, y = pct, color = policy) +
+  aes(x = reallocation_rate, y = prop, color = policy) +
   facet_wrap(~outcome, ncol = 2, scales = "free_y") +
   geom_line(linewidth = 1) +
   geom_hline(yintercept = 0, color = "black", linewidth = 1, linetype = 2) +
   theme_minimal() +
   labs(y = "Direct + Indirect + Induced Effect (%)",
        x = "Proportion of Expenditure Reallocated",
-       colour = "scenario")
-ggsave("output/FIG2_SA_reallocation_rate.jpg")
-ggsave("output/FIG2_SA_reallocation_rate.pdf")
+       colour = "scenario") +
+  scale_y_continuous(labels = scales::percent) +
+  scale_colour_manual(values = c("#fb8b24","#e36414","#9a031e","#5f0f40"))
+ggsave("output/FIG2_SA_reallocation_rate.jpg", width = 8, height = 6)
+ggsave("output/FIG2_SA_reallocation_rate.pdf", width = 8, height = 6)
 
 
 
@@ -115,7 +119,8 @@ ggplot(sa1_result[outcome == "Output"]) +
        x = "Proportion of Expenditure Reallocated") +
   ylim(NA,0.1) +
   geom_point(data = data.table(y = rep(0,4), x = c(0.05,0.12,0.29,0.33)),
-             aes(x = x, y = y), colour = "black", size = 3)
+             aes(x = x, y = y), colour = "black", size = 3) +
+  scale_colour_manual(values = c("#fb8b24","#e36414","#9a031e","#5f0f40"))
 
 ggplot(sa1_result[outcome == "Gross Value Added"]) +
   aes(x = reallocation_rate, y = pct, color = policy) +
@@ -127,7 +132,8 @@ ggplot(sa1_result[outcome == "Gross Value Added"]) +
        x = "Proportion of Expenditure Reallocated") +
   ylim(NA,0.1) +
   geom_point(data = data.table(y = rep(0,4), x = c(0.04,0.09,0.25,0.31)),
-             aes(x = x, y = y), colour = "black", size = 3)
+             aes(x = x, y = y), colour = "black", size = 3) +
+  scale_colour_manual(values = c("#fb8b24","#e36414","#9a031e","#5f0f40"))
 
 ggplot(sa1_result[outcome == "Tax on Employers"]) +
   aes(x = reallocation_rate, y = pct, color = policy) +
@@ -139,7 +145,8 @@ ggplot(sa1_result[outcome == "Tax on Employers"]) +
        x = "Proportion of Expenditure Reallocated") +
   ylim(-0.25,0.25) +
   geom_point(data = data.table(y = rep(0,4), x = c(0.27,0.36,0.41,0.50)),
-             aes(x = x, y = y), colour = "black", size = 3)
+             aes(x = x, y = y), colour = "black", size = 3) +
+  scale_colour_manual(values = c("#fb8b24","#e36414","#9a031e","#5f0f40"))
 
 ggplot(sa1_result[outcome == "Employment"]) +
   aes(x = reallocation_rate, y = pct, color = policy) +
@@ -151,7 +158,8 @@ ggplot(sa1_result[outcome == "Employment"]) +
        x = "Proportion of Expenditure Reallocated") +
   ylim(-0.01,0.02) +
   geom_point(data = data.table(y = rep(0,4), x = c(0.03,0.08,0.21,0.25)),
-             aes(x = x, y = y), colour = "black", size = 3)
+             aes(x = x, y = y), colour = "black", size = 3) +
+  scale_colour_manual(values = c("#fb8b24","#e36414","#9a031e","#5f0f40"))
 
 
 ggplot(sa1_result[outcome == "Net Earnings"]) +
@@ -164,7 +172,8 @@ ggplot(sa1_result[outcome == "Net Earnings"]) +
        x = "Proportion of Expenditure Reallocated") +
   ylim(-0.01,0.01) +
   geom_point(data = data.table(y = rep(0,4), x = c(0.03,0.08,0.21,0.25)),
-             aes(x = x, y = y), colour = "black", size = 3)
+             aes(x = x, y = y), colour = "black", size = 3) +
+  scale_colour_manual(values = c("#fb8b24","#e36414","#9a031e","#5f0f40"))
 
 
 ggplot(sa1_result[outcome == "Tax on Employees"]) +
@@ -177,5 +186,6 @@ ggplot(sa1_result[outcome == "Tax on Employees"]) +
        x = "Proportion of Expenditure Reallocated") +
   ylim(-0.01,0.01) +
   geom_point(data = data.table(y = rep(0,4), x = c(0.03,0.08,0.20,0.24)),
-             aes(x = x, y = y), colour = "black", size = 3)
+             aes(x = x, y = y), colour = "black", size = 3) +
+  scale_colour_manual(values = c("#fb8b24","#e36414","#9a031e","#5f0f40"))
 

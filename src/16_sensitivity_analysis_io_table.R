@@ -107,6 +107,7 @@ ggplot(sa2_result) +
   scale_y_continuous(labels = scales::percent) +
   theme( # remove the vertical grid lines
     panel.grid.major.x = element_blank(),
-    panel.grid.minor.x = element_blank())
-ggsave("output/FIG3_SA_io_table.jpg")
-ggsave("output/FIG3_SA_io_table.pdf")
+    panel.grid.minor.x = element_blank()) +
+  scale_fill_manual(values = c("#fb8b24","#e36414","#9a031e","#5f0f40"))
+ggsave("output/FIG3_SA_io_table.jpg", width = 8, height = 6)
+ggsave("output/FIG3_SA_io_table.pdf", width = 8, height = 6)
