@@ -65,9 +65,9 @@ for (i in 1:4){
 
 
     if (i == 1 & j == 1){
-      sa2_result <- copy(effects)
+      sa1_result <- copy(effects)
     } else {
-      sa2_result <- rbindlist(list(sa2_result, effects))
+      sa1_result <- rbindlist(list(sa1_result, effects))
     }
 
   }
@@ -76,25 +76,25 @@ for (i in 1:4){
 ##############################################
 #### Plot the sensitivity analysis results
 
-sa2_result[, outcome := factor(outcome,
+sa1_result[, outcome := factor(outcome,
                                levels = c("output_vec","gva_vec","tax_vec","fte_vec","net_earn_vec","inc_tax_nics_vec"),
                                labels = c("Output","Gross Value Added","Tax on Employers","Employment","Net Earnings","Tax on Employees"))]
 
-sa2_result[, policy := factor(policy,
+sa1_result[, policy := factor(policy,
                               levels = c("alcohol","tobacco","food","gambling"),
                               labels = c("(1) alcohol", "(2) tobacco", "(3) food", "(4) gambling"))]
 
 #############################################
 ## Calculate all effects relative to 2019
 
-sa2_result_2019 <- sa2_result[year_io_table == 2019]
-setnames(sa2_result_2019, c("estimate"), c("estimate_2019"))
-sa2_result_2019[, year_io_table := NULL]
+sa1_result_2019 <- sa2_result[year_io_table == 2019]
+setnames(sa1_result_2019, c("estimate"), c("estimate_2019"))
+sa1_result_2019[, year_io_table := NULL]
 
-sa2_result <- merge(sa2_result, sa2_result_2019, by = c("outcome","policy"), sort = FALSE)
-sa2_result[, estimate_rel := (estimate/estimate_2019) - 1]
+sa1_result <- merge(sa1_result, sa1_result_2019, by = c("outcome","policy"), sort = FALSE)
+sa1_result[, estimate_rel := (estimate/estimate_2019) - 1]
 
-ggplot(sa2_result) +
+ggplot(sa1_result) +
   aes(x = year_io_table, y = estimate_rel, fill = policy) +
   facet_wrap(~outcome, ncol = 2) +
   geom_col(position = "dodge", colour = "black") +
@@ -109,5 +109,5 @@ ggplot(sa2_result) +
     panel.grid.major.x = element_blank(),
     panel.grid.minor.x = element_blank()) +
   scale_fill_manual(values = c("#fb8b24","#e36414","#9a031e","#5f0f40"))
-ggsave("output/FIG3_SA_io_table.jpg", width = 8, height = 6)
-ggsave("output/FIG3_SA_io_table.pdf", width = 8, height = 6)
+ggsave("output/FIG_SA1_io_table.jpg", width = 8, height = 6)
+ggsave("output/FIG_SA1_io_table.pdf", width = 8, height = 6)

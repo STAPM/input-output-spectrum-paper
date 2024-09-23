@@ -65,9 +65,9 @@ for (i in 1:4){
 
 
   if (i == 1 & j == 1){
-  sa1_result <- copy(effects_pct)
+  sa2_result <- copy(effects_pct)
   } else {
-  sa1_result <- rbindlist(list(sa1_result, effects_pct))
+  sa2_result <- rbindlist(list(sa2_result, effects_pct))
   }
 
   }
@@ -78,17 +78,17 @@ for (i in 1:4){
 ##############################################
 #### Plot the sensitivity analysis results
 
-sa1_result[, outcome := factor(outcome,
+sa2_result[, outcome := factor(outcome,
                                levels = c("output_vec","gva_vec","tax_vec","fte_vec","net_earn_vec","inc_tax_nics_vec"),
                                labels = c("Output","Gross Value Added","Tax on Employers","Employment","Net Earnings","Tax on Employees"))]
 
-sa1_result[, policy := factor(policy,
+sa2_result[, policy := factor(policy,
                               levels = c("alcohol","tobacco","food","gambling"),
                               labels = c("(1) alcohol", "(2) tobacco", "(3) food", "(4) gambling"))]
 
-sa1_result[, prop := pct/100]
+sa2_result[, prop := pct/100]
 
-ggplot(sa1_result) +
+ggplot(sa2_result) +
   aes(x = reallocation_rate, y = prop, color = policy) +
   facet_wrap(~outcome, ncol = 2, scales = "free_y") +
   geom_line(linewidth = 1) +
@@ -99,8 +99,8 @@ ggplot(sa1_result) +
        colour = "scenario") +
   scale_y_continuous(labels = scales::percent) +
   scale_colour_manual(values = c("#fb8b24","#e36414","#9a031e","#5f0f40"))
-ggsave("output/FIG2_SA_reallocation_rate.jpg", width = 8, height = 6)
-ggsave("output/FIG2_SA_reallocation_rate.pdf", width = 8, height = 6)
+ggsave("output/FIG_SA2_reallocation_rate.jpg", width = 8, height = 6)
+ggsave("output/FIG_SA2_reallocation_rate.pdf", width = 8, height = 6)
 
 
 
@@ -109,7 +109,7 @@ ggsave("output/FIG2_SA_reallocation_rate.pdf", width = 8, height = 6)
 ################################################################
 ## zoom in on each plot to identify the "break-even" point
 
-ggplot(sa1_result[outcome == "Output"]) +
+ggplot(sa2_result[outcome == "Output"]) +
   aes(x = reallocation_rate, y = pct, color = policy) +
   geom_line(linewidth = 1) +
   geom_hline(yintercept = 0, color = "black", linewidth = 1, linetype = 2) +
@@ -122,7 +122,7 @@ ggplot(sa1_result[outcome == "Output"]) +
              aes(x = x, y = y), colour = "black", size = 3) +
   scale_colour_manual(values = c("#fb8b24","#e36414","#9a031e","#5f0f40"))
 
-ggplot(sa1_result[outcome == "Gross Value Added"]) +
+ggplot(sa2_result[outcome == "Gross Value Added"]) +
   aes(x = reallocation_rate, y = pct, color = policy) +
   geom_line(linewidth = 1) +
   geom_hline(yintercept = 0, color = "black", linewidth = 1, linetype = 2) +
@@ -135,7 +135,7 @@ ggplot(sa1_result[outcome == "Gross Value Added"]) +
              aes(x = x, y = y), colour = "black", size = 3) +
   scale_colour_manual(values = c("#fb8b24","#e36414","#9a031e","#5f0f40"))
 
-ggplot(sa1_result[outcome == "Tax on Employers"]) +
+ggplot(sa2_result[outcome == "Tax on Employers"]) +
   aes(x = reallocation_rate, y = pct, color = policy) +
   geom_line(linewidth = 1) +
   geom_hline(yintercept = 0, color = "black", linewidth = 1, linetype = 2) +
@@ -148,7 +148,7 @@ ggplot(sa1_result[outcome == "Tax on Employers"]) +
              aes(x = x, y = y), colour = "black", size = 3) +
   scale_colour_manual(values = c("#fb8b24","#e36414","#9a031e","#5f0f40"))
 
-ggplot(sa1_result[outcome == "Employment"]) +
+ggplot(sa2_result[outcome == "Employment"]) +
   aes(x = reallocation_rate, y = pct, color = policy) +
   geom_line(linewidth = 1) +
   geom_hline(yintercept = 0, color = "black", linewidth = 1, linetype = 2) +
@@ -162,7 +162,7 @@ ggplot(sa1_result[outcome == "Employment"]) +
   scale_colour_manual(values = c("#fb8b24","#e36414","#9a031e","#5f0f40"))
 
 
-ggplot(sa1_result[outcome == "Net Earnings"]) +
+ggplot(sa2_result[outcome == "Net Earnings"]) +
   aes(x = reallocation_rate, y = pct, color = policy) +
   geom_line(linewidth = 1) +
   geom_hline(yintercept = 0, color = "black", linewidth = 1, linetype = 2) +
@@ -176,7 +176,7 @@ ggplot(sa1_result[outcome == "Net Earnings"]) +
   scale_colour_manual(values = c("#fb8b24","#e36414","#9a031e","#5f0f40"))
 
 
-ggplot(sa1_result[outcome == "Tax on Employees"]) +
+ggplot(sa2_result[outcome == "Tax on Employees"]) +
   aes(x = reallocation_rate, y = pct, color = policy) +
   geom_line(linewidth = 1) +
   geom_hline(yintercept = 0, color = "black", linewidth = 1, linetype = 2) +
