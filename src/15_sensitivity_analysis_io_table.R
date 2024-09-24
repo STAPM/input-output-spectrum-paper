@@ -87,7 +87,7 @@ sa1_result[, policy := factor(policy,
 #############################################
 ## Calculate all effects relative to 2019
 
-sa1_result_2019 <- sa2_result[year_io_table == 2019]
+sa1_result_2019 <- sa1_result[year_io_table == 2019]
 setnames(sa1_result_2019, c("estimate"), c("estimate_2019"))
 sa1_result_2019[, year_io_table := NULL]
 
