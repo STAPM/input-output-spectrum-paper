@@ -50,6 +50,15 @@ rm(policy)
 
 }
 
+################################################################
+### save out the final demand vector
+
+saveRDS(policy_1_alcohol$final_demand,  "intermediate/final_demand_1_alcohol.rds")
+saveRDS(policy_2_tobacco$final_demand,  "intermediate/final_demand_2_tobacco.rds")
+saveRDS(policy_3_food$final_demand,     "intermediate/final_demand_3_food.rds")
+saveRDS(policy_4_gambling$final_demand, "intermediate/final_demand_4_gambling.rds")
+
+################################################################
 ### get vectors of results to write to the spreadsheet
 
 
