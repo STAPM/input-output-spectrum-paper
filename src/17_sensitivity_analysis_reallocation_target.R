@@ -203,3 +203,9 @@ ggplot(sa3_result[outcome == "Tax on Employees"]) +
   scale_fill_manual(values = c("#fb8b24","#e36414","#9a031e","#5f0f40"))
 ggsave("output/FIG_SA3_consumption_category_IncTaxes.jpg", width = 8, height = 6)
 ggsave("output/FIG_SA3_consumption_category_IncTaxes.pdf", width = 8, height = 6)
+
+
+nrow(sa3_result[outcome == "Gross Value Added" & estimate_rel < 0 & policy == "(1) alcohol"])
+nrow(sa3_result[outcome == "Gross Value Added" & estimate_rel < 0 & policy == "(2) tobacco"])
+nrow(sa3_result[outcome == "Gross Value Added" & estimate_rel < 0 & policy == "(3) food"])
+nrow(sa3_result[outcome == "Gross Value Added" & estimate_rel < 0 & policy == "(4) gambling"])

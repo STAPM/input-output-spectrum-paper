@@ -121,6 +121,8 @@ ggplot(sa2_result[outcome == "Output"]) +
   geom_point(data = data.table(y = rep(0,4), x = c(0.05,0.12,0.29,0.33)),
              aes(x = x, y = y), colour = "black", size = 3) +
   scale_colour_manual(values = c("#fb8b24","#e36414","#9a031e","#5f0f40"))
+ggsave("output/FIG_SA2b_reallocation_rate_Output.jpg", width = 8, height = 6)
+ggsave("output/FIG_SA2b_reallocation_rate_Output.pdf", width = 8, height = 6)
 
 ggplot(sa2_result[outcome == "Gross Value Added"]) +
   aes(x = reallocation_rate, y = pct, color = policy) +
@@ -134,6 +136,8 @@ ggplot(sa2_result[outcome == "Gross Value Added"]) +
   geom_point(data = data.table(y = rep(0,4), x = c(0.04,0.09,0.25,0.31)),
              aes(x = x, y = y), colour = "black", size = 3) +
   scale_colour_manual(values = c("#fb8b24","#e36414","#9a031e","#5f0f40"))
+ggsave("output/FIG_SA2b_reallocation_rate_GVA.jpg", width = 8, height = 6)
+ggsave("output/FIG_SA2b_reallocation_rate_GVA.pdf", width = 8, height = 6)
 
 ggplot(sa2_result[outcome == "Tax on Employers"]) +
   aes(x = reallocation_rate, y = pct, color = policy) +
@@ -147,6 +151,8 @@ ggplot(sa2_result[outcome == "Tax on Employers"]) +
   geom_point(data = data.table(y = rep(0,4), x = c(0.27,0.36,0.41,0.50)),
              aes(x = x, y = y), colour = "black", size = 3) +
   scale_colour_manual(values = c("#fb8b24","#e36414","#9a031e","#5f0f40"))
+ggsave("output/FIG_SA2b_reallocation_rate_TaxEmployers.jpg", width = 8, height = 6)
+ggsave("output/FIG_SA2b_reallocation_rate_TaxEmployers.pdf", width = 8, height = 6)
 
 ggplot(sa2_result[outcome == "Employment"]) +
   aes(x = reallocation_rate, y = pct, color = policy) +
@@ -160,6 +166,8 @@ ggplot(sa2_result[outcome == "Employment"]) +
   geom_point(data = data.table(y = rep(0,4), x = c(0.03,0.08,0.21,0.25)),
              aes(x = x, y = y), colour = "black", size = 3) +
   scale_colour_manual(values = c("#fb8b24","#e36414","#9a031e","#5f0f40"))
+ggsave("output/FIG_SA2b_reallocation_rate_Employment.jpg", width = 8, height = 6)
+ggsave("output/FIG_SA2b_reallocation_rate_Employment.pdf", width = 8, height = 6)
 
 
 ggplot(sa2_result[outcome == "Net Earnings"]) +
@@ -174,7 +182,8 @@ ggplot(sa2_result[outcome == "Net Earnings"]) +
   geom_point(data = data.table(y = rep(0,4), x = c(0.03,0.08,0.21,0.25)),
              aes(x = x, y = y), colour = "black", size = 3) +
   scale_colour_manual(values = c("#fb8b24","#e36414","#9a031e","#5f0f40"))
-
+ggsave("output/FIG_SA2b_reallocation_rate_NetEarnings.jpg", width = 8, height = 6)
+ggsave("output/FIG_SA2b_reallocation_rate_NetEarnings.pdf", width = 8, height = 6)
 
 ggplot(sa2_result[outcome == "Tax on Employees"]) +
   aes(x = reallocation_rate, y = pct, color = policy) +
@@ -185,7 +194,13 @@ ggplot(sa2_result[outcome == "Tax on Employees"]) +
   labs(y = "Direct + Indirect + Induced Effect (%)",
        x = "Proportion of Expenditure Reallocated") +
   ylim(-0.01,0.01) +
-  geom_point(data = data.table(y = rep(0,4), x = c(0.03,0.08,0.20,0.24)),
+  geom_point(data = data.table(y = rep(0,4), x = c(0.035,0.08,0.20,0.24)),
              aes(x = x, y = y), colour = "black", size = 3) +
   scale_colour_manual(values = c("#fb8b24","#e36414","#9a031e","#5f0f40"))
+ggsave("output/FIG_SA2b_reallocation_rate_IncTaxes.jpg", width = 8, height = 6)
+ggsave("output/FIG_SA2b_reallocation_rate_IncTaxes.pdf", width = 8, height = 6)
+
+
+
+
 
