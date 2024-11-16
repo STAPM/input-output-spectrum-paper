@@ -87,27 +87,29 @@ sa1_result[, policy := factor(policy,
 #############################################
 ## Calculate all effects relative to 2019
 
-sa1_result_2019 <- sa1_result[year_io_table == 2019]
-setnames(sa1_result_2019, c("estimate"), c("estimate_2019"))
-sa1_result_2019[, year_io_table := NULL]
+#sa1_result_2019 <- sa1_result[year_io_table == 2019]
+#setnames(sa1_result_2019, c("estimate"), c("estimate_2019"))
+#sa1_result_2019[, year_io_table := NULL]
 
-sa1_result <- merge(sa1_result, sa1_result_2019, by = c("outcome","policy"), sort = FALSE)
-sa1_result[, estimate_rel := (estimate/estimate_2019) - 1]
+#sa1_result <- merge(sa1_result, sa1_result_2019, by = c("outcome","policy"), sort = FALSE)
+#sa1_result[, estimate_rel := (estimate/estimate_2019) - 1]
+
+
 
 ggplot(sa1_result) +
-  aes(x = year_io_table, y = estimate_rel, fill = policy) +
-  facet_wrap(~outcome, ncol = 2) +
+  aes(x = policy, y = estimate, fill = as.character(year_io_table)) +
+  facet_wrap(~outcome, ncol = 2, scales = "free_y") +
   geom_col(position = "dodge", colour = "black") +
   geom_hline(yintercept = 0, colour = "black", linewidth = 1, linetype = 2) +
   theme_minimal() +
   #theme_classic() +
-  labs(y = "Absolute Direct + Indirect + Induced Effect \n(% relative to 2019)",
-       x = "Input-Output Table",
+  labs(y = "Absolute Direct + Indirect + Induced Effect",
+       x = "",
        fill = "scenario")  +
-  scale_y_continuous(labels = scales::percent) +
+  scale_y_continuous() +
   theme( # remove the vertical grid lines
     panel.grid.major.x = element_blank(),
     panel.grid.minor.x = element_blank()) +
-  scale_fill_manual(values = c("#fb8b24","#e36414","#9a031e","#5f0f40"))
+  scale_fill_manual(values = c("#d4d700","#aacc00","#55a630","#007f5f"))
 ggsave("output/FIG_SA1_io_table.jpg", width = 8, height = 6)
 ggsave("output/FIG_SA1_io_table.pdf", width = 8, height = 6)

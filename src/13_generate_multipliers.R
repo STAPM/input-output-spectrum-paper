@@ -57,7 +57,7 @@ ggplot(multipliers) +
   geom_hline(yintercept = 0, color = "black") +
   theme_minimal() +
   scale_x_discrete(labels = NULL) +
-  scale_fill_manual(values = c("#fb8500","#9a031e","#5f0f40","#003566")) +
+  scale_fill_manual(values = c("#fb8500","#c1121f","#5e548e","#003566")) +
   scale_alpha_manual(values = c(1,0.2)) +
   scale_color_manual(values = c("white","black")) +
   scale_y_continuous(breaks = seq(0,16,2)) +
@@ -101,7 +101,7 @@ ggplot(multipliers) +
   geom_hline(yintercept = 0, color = "black") +
   theme_minimal() +
   scale_x_discrete(labels = NULL) +
-  scale_fill_manual(values = c("#fb8500","#9a031e","#5f0f40","#003566")) +
+  scale_fill_manual(values = c("#fb8500","#c1121f","#5e548e","#003566")) +
   scale_alpha_manual(values = c(1,0.2)) +
   scale_color_manual(values = c("white","black")) +
   scale_y_continuous(breaks = seq(0,3,0.5)) +
@@ -150,12 +150,12 @@ ggplot(multipliers) +
   geom_hline(yintercept = 0, color = "black") +
   theme_minimal() +
   scale_x_discrete(labels = NULL) +
-  scale_fill_manual(values = c("#fb8500","#9a031e","#5f0f40","#003566")) +
+  scale_fill_manual(values = c("#fb8500","#c1121f","#5e548e","#003566")) +
   scale_alpha_manual(values = c(1,0.2)) +
   scale_color_manual(values = c("white","black")) +
   scale_y_continuous(breaks = seq(0,7,1)) +
   labs(x = "Product category (ordered by multiplier value)",
-       y = "Grpss Value Added Multiplier",
+       y = "Gross Value Added Multiplier",
        fill = "") +
   theme(legend.position = "none")  +
   theme( # remove the vertical grid lines
@@ -163,8 +163,5 @@ ggplot(multipliers) +
     panel.grid.minor.x = element_blank())
 ggsave("output/gva_multipliers_type2.jpg", width = 8, height = 6)
 ggsave("output/gva_multipliers_type2.pdf", width = 8, height = 6)
-
-
-
 
 

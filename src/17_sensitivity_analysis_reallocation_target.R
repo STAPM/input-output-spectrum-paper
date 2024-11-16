@@ -107,7 +107,7 @@ ggplot(sa3_result[outcome == "Output"]) +
   theme( # remove the vertical grid lines
     panel.grid.major.x = element_blank(),
     panel.grid.minor.x = element_blank()) +
-  scale_fill_manual(values = c("#fb8b24","#e36414","#9a031e","#5f0f40"))
+  scale_fill_manual(values = c("#00b4d8","#bc6c25","#c1121f","#5e548e"))
 ggsave("output/FIG_SA3_consumption_category_Output.jpg", width = 8, height = 6)
 ggsave("output/FIG_SA3_consumption_category_Output.pdf", width = 8, height = 6)
 
@@ -125,7 +125,7 @@ ggplot(sa3_result[outcome == "Gross Value Added"]) +
   theme( # remove the vertical grid lines
     panel.grid.major.x = element_blank(),
     panel.grid.minor.x = element_blank()) +
-  scale_fill_manual(values = c("#fb8b24","#e36414","#9a031e","#5f0f40"))
+  scale_fill_manual(values = c("#00b4d8","#bc6c25","#c1121f","#5e548e"))
 ggsave("output/FIG_SA3_consumption_category_GVA.jpg", width = 8, height = 6)
 ggsave("output/FIG_SA3_consumption_category_GVA.pdf", width = 8, height = 6)
 
@@ -143,7 +143,7 @@ ggplot(sa3_result[outcome == "Tax on Employers"]) +
   theme( # remove the vertical grid lines
     panel.grid.major.x = element_blank(),
     panel.grid.minor.x = element_blank()) +
-  scale_fill_manual(values = c("#fb8b24","#e36414","#9a031e","#5f0f40"))
+  scale_fill_manual(values = c("#00b4d8","#bc6c25","#c1121f","#5e548e"))
 ggsave("output/FIG_SA3_consumption_category_TaxEmployers.jpg", width = 8, height = 6)
 ggsave("output/FIG_SA3_consumption_category_TaxEmployers.pdf", width = 8, height = 6)
 
@@ -162,7 +162,7 @@ ggplot(sa3_result[outcome == "Employment"]) +
   theme( # remove the vertical grid lines
     panel.grid.major.x = element_blank(),
     panel.grid.minor.x = element_blank()) +
-  scale_fill_manual(values = c("#fb8b24","#e36414","#9a031e","#5f0f40"))
+  scale_fill_manual(values = c("#00b4d8","#bc6c25","#c1121f","#5e548e"))
 ggsave("output/FIG_SA3_consumption_category_Employment.jpg", width = 8, height = 6)
 ggsave("output/FIG_SA3_consumption_category_Employment.pdf", width = 8, height = 6)
 
@@ -181,7 +181,7 @@ ggplot(sa3_result[outcome == "Net Earnings"]) +
   theme( # remove the vertical grid lines
     panel.grid.major.x = element_blank(),
     panel.grid.minor.x = element_blank()) +
-  scale_fill_manual(values = c("#fb8b24","#e36414","#9a031e","#5f0f40"))
+  scale_fill_manual(values = c("#00b4d8","#bc6c25","#c1121f","#5e548e"))
 ggsave("output/FIG_SA3_consumption_category_NetEarnings.jpg", width = 8, height = 6)
 ggsave("output/FIG_SA3_consumption_category_NetEarnings.pdf", width = 8, height = 6)
 
@@ -200,7 +200,7 @@ ggplot(sa3_result[outcome == "Tax on Employees"]) +
   theme( # remove the vertical grid lines
     panel.grid.major.x = element_blank(),
     panel.grid.minor.x = element_blank()) +
-  scale_fill_manual(values = c("#fb8b24","#e36414","#9a031e","#5f0f40"))
+  scale_fill_manual(values = c("#00b4d8","#bc6c25","#c1121f","#5e548e"))
 ggsave("output/FIG_SA3_consumption_category_IncTaxes.jpg", width = 8, height = 6)
 ggsave("output/FIG_SA3_consumption_category_IncTaxes.pdf", width = 8, height = 6)
 
@@ -209,3 +209,14 @@ nrow(sa3_result[outcome == "Gross Value Added" & estimate_rel < 0 & policy == "(
 nrow(sa3_result[outcome == "Gross Value Added" & estimate_rel < 0 & policy == "(2) tobacco"])
 nrow(sa3_result[outcome == "Gross Value Added" & estimate_rel < 0 & policy == "(3) food"])
 nrow(sa3_result[outcome == "Gross Value Added" & estimate_rel < 0 & policy == "(4) gambling"])
+
+
+
+sa3_result_table <- sa3_result[outcome == "Gross Value Added"]
+
+sa3_result_table[, outcome := NULL]
+sa3_result_table[, consumption_category := factor(consumption_category,
+                                                  levels = 1:36,
+                                                  labels = cdohio.mod::coicop_categories$label)]
+
+sa3_result_table <- dcast(sa3_result_table, consumption_category ~ policy, value.var = "estimate_rel")
