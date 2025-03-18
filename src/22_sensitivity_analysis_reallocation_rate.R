@@ -84,7 +84,7 @@ sa2_result[, outcome := factor(outcome,
 
 sa2_result[, policy := factor(policy,
                               levels = c("alcohol","tobacco","food","gambling"),
-                              labels = c("(1) Alcohol", "(2) Tobacco", "(3) HFSS Food", "(4) Gambling"))]
+                              labels = c("Alcohol", "Tobacco", "Confectionary", "Gambling"))]
 
 sa2_result[, prop := pct/100]
 
@@ -215,23 +215,36 @@ break_even <- c(0.12,0.05,0.33,0.29,
 
 sa2_result_bar[, break_even_point := break_even]
 
+##################
 
-ggplot(sa2_result_bar) +
-  aes(x = policy, y = break_even_point, fill = policy) +
+sa2_result_bar_new <- copy(sa2_result_bar)
+sa2_result_bar_new[, add := 1 - break_even_point]
+
+sa2_result_bar_new <- melt(sa2_result_bar_new,
+                           id.vars = c("outcome","policy"))
+
+sa2_result_bar_new[, variable := factor(variable,
+                                        levels = rev(c("break_even_point","add")))]
+
+sa2_result_bar_new[, label := paste0(value*100,"%")]
+sa2_result_bar_new[variable == "add", label := NA]
+
+
+ggplot(sa2_result_bar_new) +
+  aes(x = policy, y = value, fill = variable) +
+  geom_col(colour = "black") +
+  geom_text(aes(label = label), vjust = -0.5, size = 4) +
   facet_wrap(~outcome, ncol = 2) +
-  geom_col(position = "dodge", colour = "black") +
-  geom_text(aes(label = paste0(break_even_point*100,"%")), vjust = 1.2, size = 4) +
-  theme_minimal() +
-  #theme_classic() +
   labs(y = "'Break-even' Reallocation Rate",
        x = "Scenario",
        fill = "scenario") +
   scale_y_continuous(labels = scales::percent) +
+  scale_fill_manual(values = c("white","#5e548e")) +
+  theme_minimal() +
   theme( # remove the vertical grid lines
     panel.grid.major.x = element_blank(),
     panel.grid.minor.x = element_blank(),
-
-    legend.position = "none") +
-  scale_fill_manual(values = c("#00b4d8","#bc6c25","#c1121f","#5e548e"))
+          # remove legend
+    legend.position = "none")
 ggsave("output/FIG_SA2_break_evens.jpg", width = 8, height = 6)
 ggsave("output/FIG_SA2_break_evens.pdf", width = 8, height = 6)

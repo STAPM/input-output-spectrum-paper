@@ -78,11 +78,11 @@ for (i in 1:4){
 
 sa1_result[, outcome := factor(outcome,
                                levels = c("output_vec","gva_vec","tax_vec","fte_vec","net_earn_vec","inc_tax_nics_vec"),
-                               labels = c("Output","Gross Value Added","Tax on Employers","Employment","Net Earnings","Tax on Employees"))]
+                               labels = c("Output (£m)","Gross Value Added (£m)","Tax on Employers (£m)","Employment (FTE)","Net Earnings (£m)","Tax on Employees (£m)"))]
 
 sa1_result[, policy := factor(policy,
                               levels = c("alcohol","tobacco","food","gambling"),
-                              labels = c("(1) alcohol", "(2) tobacco", "(3) food", "(4) gambling"))]
+                              labels = c("Alcohol", "Tobacco", "Confectionary", "Gambling"))]
 
 #############################################
 ## Calculate all effects relative to 2019
