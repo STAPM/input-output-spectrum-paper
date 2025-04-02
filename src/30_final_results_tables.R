@@ -1,6 +1,13 @@
 
 ### This code writes out results to the output tables spreadsheet template
 
+source("src/11_generate_inputs.R")
+source("src/31_read_baseline.R")
+source("src/32_read_main_results.R")
+source("src/33_read_sectoral_results.R")
+
+### fill in the workbook
+
 wb <- openxlsx::loadWorkbook("output/templates/output_tables_template_MARCH25.xlsx")
 
 #################################
@@ -123,6 +130,9 @@ openxlsx::writeData(wb,x = gambling_pct_gva,          startCol = 9, startRow = 2
 
 ################################################
 ### TABLE 3 - MAIN RESULTS FOR GVA BY SECTOR
+
+openxlsx::writeData(wb,x = sector_results_final[,2:5], startCol = 2, startRow = 4,  sheet = "TAB3_results_by_sector", rowNames = FALSE, colNames = FALSE)
+
 
 ##### WRITE OUT RESULTS
 
