@@ -16,7 +16,8 @@ change_food            <- list(rep(-0.0, 19), rep(-0.0, 19), c(rep(-0.0, 18), 1)
 change_gambling        <- list(rep(-0.0, 9),  rep(-0.0, 9),  rep(-0.0, 9),  rep(1, 9))
 change_tobacco_licit   <- list(rep(-0.0, 2),  rep(1, 2),  rep(-0.0, 2),  rep(-0.0, 2))
 change_tobacco_illicit <- list(rep(-0.0, 2),  rep(0, 2),  rep(-0.0, 2),  rep(-0.0, 2))
-change_alcohol         <- list(rep(1, 4),  rep(-0.0, 4),  rep(-0.0, 4),  rep(-0.0, 4))
+change_alcohol_off     <- list(rep(1, 4),  rep(-0.0, 4),  rep(-0.0, 4),  rep(-0.0, 4))
+change_alcohol_on      <- list(rep(1, 4),  rep(-0.0, 4),  rep(-0.0, 4),  rep(-0.0, 4))
 
 excluded_products <- NULL
 
@@ -37,7 +38,8 @@ baseline <- cdohio(year = year,
                    change_gambling = change_gambling[[i]],
                    change_tobacco_licit = change_tobacco_licit[[i]],
                    change_tobacco_illicit = change_tobacco_illicit[[i]],
-                   change_alcohol = change_alcohol[[i]],
+                   change_alcohol_on = change_alcohol_on[[i]],
+                   change_alcohol_off = change_alcohol_off[[i]],
                    reallocate_food = reallocate_food[[i]],
                    consumption_category = consumption_category)
 
