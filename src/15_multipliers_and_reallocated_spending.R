@@ -1,3 +1,4 @@
+source("src/03_load_packages.R")
 
 ### this script file calculates how much of reallocated spending is shifted to products
 ### with i) higher output multipliers, ii) higher GVA multipliers, and iii) a higher

@@ -9,7 +9,8 @@ source("src/03_load_packages.R")
 ## main analyses
 source("src/11_generate_inputs.R")
 source("src/12_model_baseline.R")
-source("src/13_generate_analyses.R")
+source("src/13a_generate_main_analyses.R")
+source("src/13b_generate_extra_analyses.R")
 source("src/14_generate_multipliers.R")
 source("src/15_multipliers_and_reallocated_spending.R")
 

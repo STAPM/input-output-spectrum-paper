@@ -1,3 +1,4 @@
+source("src/03_load_packages.R")
 
 ## This code runs the four scenarios while varying the reallocation percentage
 
@@ -12,7 +13,7 @@
 ## fixed inputs
 year <- 2019
 year_io <- 2019
-reallocate_prop_vec <- seq(0,1,0.05)
+reallocate_prop_vec <- seq(0,1.6,0.05)
 reallocate_food <- NULL
 consumption_category <- NULL
 
@@ -21,7 +22,8 @@ change_food            <- list(rep(-0.0, 19), rep(-0.0, 19), c(rep(-0.0, 18),-0.
 change_gambling        <- list(rep(-0.0, 9),  rep(-0.0, 9),  rep(-0.0, 9),  rep(-0.1, 9))
 change_tobacco_licit   <- list(rep(-0.0, 2),  rep(-0.1, 2),  rep(-0.0, 2),  rep(-0.0, 2))
 change_tobacco_illicit <- list(rep(-0.0, 2),  rep(-0.1, 2),  rep(-0.0, 2),  rep(-0.0, 2))
-change_alcohol         <- list(rep(-0.1, 4),  rep(-0.0, 4),  rep(-0.0, 4),  rep(-0.0, 4))
+change_alcohol_on      <- list(rep(-0.1, 4),  rep(-0.0, 4),  rep(-0.0, 4),  rep(-0.0, 4))
+change_alcohol_off     <- list(rep(-0.1, 4),  rep(-0.0, 4),  rep(-0.0, 4),  rep(-0.0, 4))
 
 excluded_products      <- c("alcohol","tobacco","food","gambling")
 
@@ -42,7 +44,8 @@ for (i in 1:4){
                    change_gambling = change_gambling[[i]],
                    change_tobacco_licit = change_tobacco_licit[[i]],
                    change_tobacco_illicit = change_tobacco_illicit[[i]],
-                   change_alcohol = change_alcohol[[i]],
+                   change_alcohol_on = change_alcohol_on[[i]],
+                   change_alcohol_off = change_alcohol_off[[i]],
                    reallocate_food = reallocate_food[[i]],
                    consumption_category = consumption_category)
 
@@ -99,8 +102,7 @@ ggplot(sa2_result) +
        colour = "scenario") +
   scale_y_continuous(labels = scales::percent) +
   scale_colour_manual(values = c("#00b4d8","#bc6c25","#c1121f","#5e548e"))
-ggsave("output/FIG_SA2_reallocation_rate.jpg", width = 8, height = 6)
-ggsave("output/FIG_SA2_reallocation_rate.pdf", width = 8, height = 6)
+ggsave("output/FIG_SA2_reallocation_rate.svg", width = 8, height = 6)
 
 
 
@@ -113,92 +115,86 @@ ggplot(sa2_result[outcome == "Output"]) +
   aes(x = reallocation_rate, y = pct, color = policy) +
   geom_line(linewidth = 1) +
   geom_hline(yintercept = 0, color = "black", linewidth = 1, linetype = 2) +
-  scale_x_continuous(breaks = seq(0,1,0.2)) +
+  scale_x_continuous(breaks = seq(0,1.6,0.2)) +
   theme_minimal() +
   labs(y = "Direct + Indirect + Induced Effect (%)",
        x = "Proportion of Expenditure Reallocated") +
   ylim(NA,0.1) +
-  geom_point(data = data.table(y = rep(0,4), x = c(0.12,0.05,0.33,0.29)),
+  geom_point(data = data.table(y = rep(0,4), x = c(1.14,0.05,0.33,0.29)),
              aes(x = x, y = y), colour = "black", size = 3) +
   scale_colour_manual(values = c("#00b4d8","#bc6c25","#c1121f","#5e548e"))
-ggsave("output/FIG_SA2b_reallocation_rate_Output.jpg", width = 8, height = 6)
-ggsave("output/FIG_SA2b_reallocation_rate_Output.pdf", width = 8, height = 6)
+ggsave("output/FIG_SA2b_reallocation_rate_Output.svg", width = 8, height = 6)
 
 ggplot(sa2_result[outcome == "Gross Value Added"]) +
   aes(x = reallocation_rate, y = pct, color = policy) +
   geom_line(linewidth = 1) +
   geom_hline(yintercept = 0, color = "black", linewidth = 1, linetype = 2) +
-  scale_x_continuous(breaks = seq(0,1,0.2)) +
+  scale_x_continuous(breaks = seq(0,1.6,0.2)) +
   theme_minimal() +
   labs(y = "Direct + Indirect + Induced Effect (%)",
        x = "Proportion of Expenditure Reallocated") +
   ylim(NA,0.1) +
-  geom_point(data = data.table(y = rep(0,4), x = c(0.09,0.04,0.25,0.31)),
+  geom_point(data = data.table(y = rep(0,4), x = c(1.03,0.04,0.25,0.31)),
              aes(x = x, y = y), colour = "black", size = 3) +
   scale_colour_manual(values = c("#00b4d8","#bc6c25","#c1121f","#5e548e"))
-ggsave("output/FIG_SA2b_reallocation_rate_GVA.jpg", width = 8, height = 6)
-ggsave("output/FIG_SA2b_reallocation_rate_GVA.pdf", width = 8, height = 6)
+ggsave("output/FIG_SA2b_reallocation_rate_GVA.svg", width = 8, height = 6)
 
 ggplot(sa2_result[outcome == "Tax on Employers"]) +
   aes(x = reallocation_rate, y = pct, color = policy) +
   geom_line(linewidth = 1) +
   geom_hline(yintercept = 0, color = "black", linewidth = 1, linetype = 2) +
-  scale_x_continuous(breaks = seq(0,1,0.2)) +
+  scale_x_continuous(breaks = seq(0,1.6,0.2)) +
   theme_minimal() +
   labs(y = "Direct + Indirect + Induced Effect (%)",
        x = "Proportion of Expenditure Reallocated") +
   ylim(-0.25,0.25) +
-  geom_point(data = data.table(y = rep(0,4), x = c(0.36,0.50,0.27,0.41)),
+  geom_point(data = data.table(y = rep(0,4), x = c(1.44,0.50,0.27,0.41)),
              aes(x = x, y = y), colour = "black", size = 3) +
   scale_colour_manual(values = c("#00b4d8","#bc6c25","#c1121f","#5e548e"))
-ggsave("output/FIG_SA2b_reallocation_rate_TaxEmployers.jpg", width = 8, height = 6)
-ggsave("output/FIG_SA2b_reallocation_rate_TaxEmployers.pdf", width = 8, height = 6)
+ggsave("output/FIG_SA2b_reallocation_rate_TaxEmployers.svg", width = 8, height = 6)
 
 ggplot(sa2_result[outcome == "Employment"]) +
   aes(x = reallocation_rate, y = pct, color = policy) +
   geom_line(linewidth = 1) +
   geom_hline(yintercept = 0, color = "black", linewidth = 1, linetype = 2) +
-  scale_x_continuous(breaks = seq(0,1,0.2)) +
+  scale_x_continuous(breaks = seq(0,1.6,0.2)) +
   theme_minimal() +
   labs(y = "Direct + Indirect + Induced Effect (%)",
        x = "Proportion of Expenditure Reallocated") +
-  ylim(-0.01,0.02) +
-  geom_point(data = data.table(y = rep(0,4), x = c(0.075,0.03,0.21,0.25)),
+  ylim(-0.02,0.01) +
+  geom_point(data = data.table(y = rep(0,4), x = c(1.3,0.03,0.21,0.25)),
              aes(x = x, y = y), colour = "black", size = 3) +
   scale_colour_manual(values = c("#00b4d8","#bc6c25","#c1121f","#5e548e"))
-ggsave("output/FIG_SA2b_reallocation_rate_Employment.jpg", width = 8, height = 6)
-ggsave("output/FIG_SA2b_reallocation_rate_Employment.pdf", width = 8, height = 6)
+ggsave("output/FIG_SA2b_reallocation_rate_Employment.svg", width = 8, height = 6)
 
 
 ggplot(sa2_result[outcome == "Net Earnings"]) +
   aes(x = reallocation_rate, y = pct, color = policy) +
   geom_line(linewidth = 1) +
   geom_hline(yintercept = 0, color = "black", linewidth = 1, linetype = 2) +
-  scale_x_continuous(breaks = seq(0,1,0.2)) +
+  scale_x_continuous(breaks = seq(0,1.6,0.2)) +
   theme_minimal() +
   labs(y = "Direct + Indirect + Induced Effect (%)",
        x = "Proportion of Expenditure Reallocated") +
-  ylim(-0.01,0.01) +
-  geom_point(data = data.table(y = rep(0,4), x = c(0.08,0.03,0.21,0.25)),
+  ylim(-0.02,0.02) +
+  geom_point(data = data.table(y = rep(0,4), x = c(1.2,0.03,0.21,0.25)),
              aes(x = x, y = y), colour = "black", size = 3) +
   scale_colour_manual(values = c("#00b4d8","#bc6c25","#c1121f","#5e548e"))
-ggsave("output/FIG_SA2b_reallocation_rate_NetEarnings.jpg", width = 8, height = 6)
-ggsave("output/FIG_SA2b_reallocation_rate_NetEarnings.pdf", width = 8, height = 6)
+ggsave("output/FIG_SA2b_reallocation_rate_NetEarnings.svg", width = 8, height = 6)
 
 ggplot(sa2_result[outcome == "Tax on Employees"]) +
   aes(x = reallocation_rate, y = pct, color = policy) +
   geom_line(linewidth = 1) +
   geom_hline(yintercept = 0, color = "black", linewidth = 1, linetype = 2) +
-  scale_x_continuous(breaks = seq(0,1,0.2)) +
+  scale_x_continuous(breaks = seq(0,1.6,0.2)) +
   theme_minimal() +
   labs(y = "Direct + Indirect + Induced Effect (%)",
        x = "Proportion of Expenditure Reallocated") +
-  ylim(-0.01,0.01) +
-  geom_point(data = data.table(y = rep(0,4), x = c(0.085,0.035,0.20,0.24)),
+  ylim(-0.02,0.02) +
+  geom_point(data = data.table(y = rep(0,4), x = c(1.1,0.035,0.20,0.24)),
              aes(x = x, y = y), colour = "black", size = 3) +
   scale_colour_manual(values = c("#00b4d8","#bc6c25","#c1121f","#5e548e"))
-ggsave("output/FIG_SA2b_reallocation_rate_IncTaxes.jpg", width = 8, height = 6)
-ggsave("output/FIG_SA2b_reallocation_rate_IncTaxes.pdf", width = 8, height = 6)
+ggsave("output/FIG_SA2b_reallocation_rate_IncTaxes.svg", width = 8, height = 6)
 
 #########################################################
 ### bar plot of the interpolated break-even points
@@ -206,12 +202,12 @@ ggsave("output/FIG_SA2b_reallocation_rate_IncTaxes.pdf", width = 8, height = 6)
 sa2_result_bar <- unique(sa2_result[,c("outcome","policy")])
 sa2_result_bar <- sa2_result_bar[order(outcome,policy),]
 
-break_even <- c(0.12,0.05,0.33,0.29,
-                0.09,0.04,0.25,0.31,
-                0.36,0.50,0.27,0.41,
-                0.075,0.03,0.21,0.25,
-                0.08,0.03,0.21,0.25,
-                0.085,0.035,0.20,0.24)
+break_even <- c(1.14,0.05,0.33,0.29,
+                1.03,0.04,0.25,0.31,
+                1.44,0.50,0.27,0.41,
+                1.30,0.03,0.21,0.25,
+                1.20,0.03,0.21,0.25,
+                1.10,0.035,0.20,0.24)
 
 sa2_result_bar[, break_even_point := break_even]
 
@@ -219,32 +215,40 @@ sa2_result_bar[, break_even_point := break_even]
 
 sa2_result_bar_new <- copy(sa2_result_bar)
 sa2_result_bar_new[, add := 1 - break_even_point]
+sa2_result_bar_new[, label := paste0(break_even_point*100,"%")]
+
+## for a section of bar over 100%
+sa2_result_bar_new[add <= 0, over := break_even_point - 1]
+sa2_result_bar_new[add <= 0, break_even_point := 1]
+sa2_result_bar_new[is.na(over), over := 0]
+sa2_result_bar_new[add < 0, add := 0]
+
 
 sa2_result_bar_new <- melt(sa2_result_bar_new,
-                           id.vars = c("outcome","policy"))
+                           id.vars = c("outcome","policy","label"))
 
 sa2_result_bar_new[, variable := factor(variable,
-                                        levels = rev(c("break_even_point","add")))]
+                                        levels = rev(c("break_even_point","add","over")))]
 
-sa2_result_bar_new[, label := paste0(value*100,"%")]
-sa2_result_bar_new[variable == "add", label := NA]
+sa2_result_bar_new[variable == "add"  , label := NA]
+sa2_result_bar_new[variable == "over" , label := NA]
 
 
 ggplot(sa2_result_bar_new) +
   aes(x = policy, y = value, fill = variable) +
-  geom_col(colour = "black") +
+  geom_col(colour = "black", linetype = 2) +
   geom_text(aes(label = label), vjust = -0.5, size = 4) +
   facet_wrap(~outcome, ncol = 2) +
+  geom_hline(yintercept = 1, colour = "black") +
   labs(y = "'Break-even' Reallocation Rate",
        x = "Scenario",
        fill = "scenario") +
   scale_y_continuous(labels = scales::percent) +
-  scale_fill_manual(values = c("white","#5e548e")) +
+  scale_fill_manual(values = c("#f19c79","white","#5e548e")) +
   theme_minimal() +
   theme( # remove the vertical grid lines
     panel.grid.major.x = element_blank(),
     panel.grid.minor.x = element_blank(),
           # remove legend
     legend.position = "none")
-ggsave("output/FIG_SA2_break_evens.jpg", width = 8, height = 6)
-ggsave("output/FIG_SA2_break_evens.pdf", width = 8, height = 6)
+ggsave("output/FIG_SA2_break_evens.svg", width = 8, height = 6)

@@ -1,3 +1,4 @@
+source("src/03_load_packages.R")
 
 ## This code runs the four scenarios while varying the input-output table used
 
@@ -21,7 +22,8 @@ change_food            <- list(rep(-0.0, 19), rep(-0.0, 19), c(rep(-0.0, 18),-0.
 change_gambling        <- list(rep(-0.0, 9),  rep(-0.0, 9),  rep(-0.0, 9),  rep(-0.1, 9))
 change_tobacco_licit   <- list(rep(-0.0, 2),  rep(-0.1, 2),  rep(-0.0, 2),  rep(-0.0, 2))
 change_tobacco_illicit <- list(rep(-0.0, 2),  rep(-0.1, 2),  rep(-0.0, 2),  rep(-0.0, 2))
-change_alcohol         <- list(rep(-0.1, 4),  rep(-0.0, 4),  rep(-0.0, 4),  rep(-0.0, 4))
+change_alcohol_on      <- list(rep(-0.1, 4),  rep(-0.0, 4),  rep(-0.0, 4),  rep(-0.0, 4))
+change_alcohol_off     <- list(rep(-0.1, 4),  rep(-0.0, 4),  rep(-0.0, 4),  rep(-0.0, 4))
 
 excluded_products      <- c("alcohol","tobacco","food","gambling")
 
@@ -42,7 +44,8 @@ for (i in 1:4){
                      change_gambling = change_gambling[[i]],
                      change_tobacco_licit = change_tobacco_licit[[i]],
                      change_tobacco_illicit = change_tobacco_illicit[[i]],
-                     change_alcohol = change_alcohol[[i]],
+                     change_alcohol_on = change_alcohol_on[[i]],
+                     change_alcohol_off = change_alcohol_off[[i]],
                      reallocate_food = reallocate_food[[i]],
                      consumption_category = consumption_category)
 
@@ -85,15 +88,7 @@ sa1_result[, policy := factor(policy,
                               labels = c("Alcohol", "Tobacco", "Confectionary", "Gambling"))]
 
 #############################################
-## Calculate all effects relative to 2019
-
-#sa1_result_2019 <- sa1_result[year_io_table == 2019]
-#setnames(sa1_result_2019, c("estimate"), c("estimate_2019"))
-#sa1_result_2019[, year_io_table := NULL]
-
-#sa1_result <- merge(sa1_result, sa1_result_2019, by = c("outcome","policy"), sort = FALSE)
-#sa1_result[, estimate_rel := (estimate/estimate_2019) - 1]
-
+## Plot results by year
 
 
 ggplot(sa1_result) +
@@ -111,5 +106,4 @@ ggplot(sa1_result) +
     panel.grid.major.x = element_blank(),
     panel.grid.minor.x = element_blank()) +
   scale_fill_manual(values = c("#d4d700","#aacc00","#55a630","#007f5f"))
-ggsave("output/FIG_SA1_io_table.jpg", width = 8, height = 6)
-ggsave("output/FIG_SA1_io_table.pdf", width = 8, height = 6)
+ggsave("output/FIG_SA1_io_table.svg", width = 8, height = 6)

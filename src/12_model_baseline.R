@@ -1,3 +1,4 @@
+source("src/03_load_packages.R")
 
 ### This code calculates baseline economic impacts of the four consumption categories
 
