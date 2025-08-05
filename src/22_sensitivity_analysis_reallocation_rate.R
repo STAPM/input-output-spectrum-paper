@@ -96,6 +96,7 @@ ggplot(sa2_result) +
   facet_wrap(~outcome, ncol = 2, scales = "free_y") +
   geom_line(linewidth = 1) +
   geom_hline(yintercept = 0, color = "black", linewidth = 1, linetype = 2) +
+  geom_vline(xintercept = 1, color = "black", linewidth = 1, linetype = 1) +
   theme_minimal() +
   labs(y = "Direct + Indirect + Induced Effect (%)",
        x = "Proportion of Expenditure Reallocated",
@@ -115,86 +116,98 @@ ggplot(sa2_result[outcome == "Output"]) +
   aes(x = reallocation_rate, y = pct, color = policy) +
   geom_line(linewidth = 1) +
   geom_hline(yintercept = 0, color = "black", linewidth = 1, linetype = 2) +
+  geom_vline(xintercept = 1, color = "black", linewidth = 1, linetype = 1) +
   scale_x_continuous(breaks = seq(0,1.6,0.2)) +
   theme_minimal() +
   labs(y = "Direct + Indirect + Induced Effect (%)",
-       x = "Proportion of Expenditure Reallocated") +
+       x = "Proportion of Expenditure Reallocated",
+       color = "scenario") +
   ylim(NA,0.1) +
   geom_point(data = data.table(y = rep(0,4), x = c(1.14,0.05,0.33,0.29)),
              aes(x = x, y = y), colour = "black", size = 3) +
   scale_colour_manual(values = c("#00b4d8","#bc6c25","#c1121f","#5e548e"))
-ggsave("output/FIG_SA2b_reallocation_rate_Output.svg", width = 8, height = 6)
+ggsave("output/FIG_SA2b_reallocation_rate_Output.svg", width = 8, height = 5)
 
 ggplot(sa2_result[outcome == "Gross Value Added"]) +
   aes(x = reallocation_rate, y = pct, color = policy) +
   geom_line(linewidth = 1) +
   geom_hline(yintercept = 0, color = "black", linewidth = 1, linetype = 2) +
+  geom_vline(xintercept = 1, color = "black", linewidth = 1, linetype = 1) +
   scale_x_continuous(breaks = seq(0,1.6,0.2)) +
   theme_minimal() +
   labs(y = "Direct + Indirect + Induced Effect (%)",
-       x = "Proportion of Expenditure Reallocated") +
+       x = "Proportion of Expenditure Reallocated",
+       color = "scenario") +
   ylim(NA,0.1) +
   geom_point(data = data.table(y = rep(0,4), x = c(1.03,0.04,0.25,0.31)),
              aes(x = x, y = y), colour = "black", size = 3) +
   scale_colour_manual(values = c("#00b4d8","#bc6c25","#c1121f","#5e548e"))
-ggsave("output/FIG_SA2b_reallocation_rate_GVA.svg", width = 8, height = 6)
+ggsave("output/FIG_SA2b_reallocation_rate_GVA.svg", width = 8, height = 5)
 
 ggplot(sa2_result[outcome == "Tax on Employers"]) +
   aes(x = reallocation_rate, y = pct, color = policy) +
   geom_line(linewidth = 1) +
   geom_hline(yintercept = 0, color = "black", linewidth = 1, linetype = 2) +
+  geom_vline(xintercept = 1, color = "black", linewidth = 1, linetype = 1) +
   scale_x_continuous(breaks = seq(0,1.6,0.2)) +
   theme_minimal() +
   labs(y = "Direct + Indirect + Induced Effect (%)",
-       x = "Proportion of Expenditure Reallocated") +
+       x = "Proportion of Expenditure Reallocated",
+       color = "scenario") +
   ylim(-0.25,0.25) +
   geom_point(data = data.table(y = rep(0,4), x = c(1.44,0.50,0.27,0.41)),
              aes(x = x, y = y), colour = "black", size = 3) +
   scale_colour_manual(values = c("#00b4d8","#bc6c25","#c1121f","#5e548e"))
-ggsave("output/FIG_SA2b_reallocation_rate_TaxEmployers.svg", width = 8, height = 6)
+ggsave("output/FIG_SA2b_reallocation_rate_TaxEmployers.svg", width = 8, height = 5)
 
 ggplot(sa2_result[outcome == "Employment"]) +
   aes(x = reallocation_rate, y = pct, color = policy) +
   geom_line(linewidth = 1) +
   geom_hline(yintercept = 0, color = "black", linewidth = 1, linetype = 2) +
+  geom_vline(xintercept = 1, color = "black", linewidth = 1, linetype = 1) +
   scale_x_continuous(breaks = seq(0,1.6,0.2)) +
   theme_minimal() +
   labs(y = "Direct + Indirect + Induced Effect (%)",
-       x = "Proportion of Expenditure Reallocated") +
+       x = "Proportion of Expenditure Reallocated",
+       color = "scenario") +
   ylim(-0.02,0.01) +
   geom_point(data = data.table(y = rep(0,4), x = c(1.3,0.03,0.21,0.25)),
              aes(x = x, y = y), colour = "black", size = 3) +
   scale_colour_manual(values = c("#00b4d8","#bc6c25","#c1121f","#5e548e"))
-ggsave("output/FIG_SA2b_reallocation_rate_Employment.svg", width = 8, height = 6)
+ggsave("output/FIG_SA2b_reallocation_rate_Employment.svg", width = 8, height = 5)
 
 
 ggplot(sa2_result[outcome == "Net Earnings"]) +
   aes(x = reallocation_rate, y = pct, color = policy) +
   geom_line(linewidth = 1) +
   geom_hline(yintercept = 0, color = "black", linewidth = 1, linetype = 2) +
+  geom_vline(xintercept = 1, color = "black", linewidth = 1, linetype = 1) +
   scale_x_continuous(breaks = seq(0,1.6,0.2)) +
   theme_minimal() +
   labs(y = "Direct + Indirect + Induced Effect (%)",
-       x = "Proportion of Expenditure Reallocated") +
+       x = "Proportion of Expenditure Reallocated",
+       color = "scenario") +
   ylim(-0.02,0.02) +
   geom_point(data = data.table(y = rep(0,4), x = c(1.2,0.03,0.21,0.25)),
              aes(x = x, y = y), colour = "black", size = 3) +
   scale_colour_manual(values = c("#00b4d8","#bc6c25","#c1121f","#5e548e"))
-ggsave("output/FIG_SA2b_reallocation_rate_NetEarnings.svg", width = 8, height = 6)
+ggsave("output/FIG_SA2b_reallocation_rate_NetEarnings.svg", width = 8, height = 5)
 
 ggplot(sa2_result[outcome == "Tax on Employees"]) +
   aes(x = reallocation_rate, y = pct, color = policy) +
   geom_line(linewidth = 1) +
   geom_hline(yintercept = 0, color = "black", linewidth = 1, linetype = 2) +
+  geom_vline(xintercept = 1, color = "black", linewidth = 1, linetype = 1) +
   scale_x_continuous(breaks = seq(0,1.6,0.2)) +
   theme_minimal() +
   labs(y = "Direct + Indirect + Induced Effect (%)",
-       x = "Proportion of Expenditure Reallocated") +
+       x = "Proportion of Expenditure Reallocated",
+       color = "scenario") +
   ylim(-0.02,0.02) +
   geom_point(data = data.table(y = rep(0,4), x = c(1.1,0.035,0.20,0.24)),
              aes(x = x, y = y), colour = "black", size = 3) +
   scale_colour_manual(values = c("#00b4d8","#bc6c25","#c1121f","#5e548e"))
-ggsave("output/FIG_SA2b_reallocation_rate_IncTaxes.svg", width = 8, height = 6)
+ggsave("output/FIG_SA2b_reallocation_rate_IncTaxes.svg", width = 8, height = 5)
 
 #########################################################
 ### bar plot of the interpolated break-even points

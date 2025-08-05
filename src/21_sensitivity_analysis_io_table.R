@@ -100,7 +100,7 @@ ggplot(sa1_result) +
   #theme_classic() +
   labs(y = "Absolute Direct + Indirect + Induced Effect",
        x = "",
-       fill = "scenario")  +
+       fill = "input-output\ntable")  +
   scale_y_continuous() +
   theme( # remove the vertical grid lines
     panel.grid.major.x = element_blank(),

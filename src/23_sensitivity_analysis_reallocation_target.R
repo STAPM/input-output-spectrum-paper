@@ -111,7 +111,7 @@ ggplot(sa3_result[outcome == "Output"]) +
     panel.grid.major.x = element_blank(),
     panel.grid.minor.x = element_blank()) +
   scale_fill_manual(values = c("#00b4d8","#bc6c25","#c1121f","#5e548e"))
-ggsave("output/FIG_SA3_consumption_category_Output.svg", width = 8, height = 6)
+ggsave("output/FIG_SA3_consumption_category_Output.svg", width = 8, height = 5)
 
 ggplot(sa3_result[outcome == "Gross Value Added"]) +
   aes(x = consumption_category, y = estimate_rel/100, fill = policy) +
@@ -128,7 +128,7 @@ ggplot(sa3_result[outcome == "Gross Value Added"]) +
     panel.grid.major.x = element_blank(),
     panel.grid.minor.x = element_blank()) +
   scale_fill_manual(values = c("#00b4d8","#bc6c25","#c1121f","#5e548e"))
-ggsave("output/FIG_SA3_consumption_category_GVA.svg", width = 8, height = 6)
+ggsave("output/FIG_SA3_consumption_category_GVA.svg", width = 8, height = 5)
 
 ggplot(sa3_result[outcome == "Tax on Employers"]) +
   aes(x = consumption_category, y = estimate_rel/100, fill = policy) +
@@ -145,7 +145,7 @@ ggplot(sa3_result[outcome == "Tax on Employers"]) +
     panel.grid.major.x = element_blank(),
     panel.grid.minor.x = element_blank()) +
   scale_fill_manual(values = c("#00b4d8","#bc6c25","#c1121f","#5e548e"))
-ggsave("output/FIG_SA3_consumption_category_TaxEmployers.svg", width = 8, height = 6)
+ggsave("output/FIG_SA3_consumption_category_TaxEmployers.svg", width = 8, height = 5)
 
 
 ggplot(sa3_result[outcome == "Employment"]) +
@@ -163,7 +163,7 @@ ggplot(sa3_result[outcome == "Employment"]) +
     panel.grid.major.x = element_blank(),
     panel.grid.minor.x = element_blank()) +
   scale_fill_manual(values = c("#00b4d8","#bc6c25","#c1121f","#5e548e"))
-ggsave("output/FIG_SA3_consumption_category_Employment.svg", width = 8, height = 6)
+ggsave("output/FIG_SA3_consumption_category_Employment.svg", width = 8, height = 5)
 
 
 ggplot(sa3_result[outcome == "Net Earnings"]) +
@@ -181,7 +181,7 @@ ggplot(sa3_result[outcome == "Net Earnings"]) +
     panel.grid.major.x = element_blank(),
     panel.grid.minor.x = element_blank()) +
   scale_fill_manual(values = c("#00b4d8","#bc6c25","#c1121f","#5e548e"))
-ggsave("output/FIG_SA3_consumption_category_NetEarnings.svg", width = 8, height = 6)
+ggsave("output/FIG_SA3_consumption_category_NetEarnings.svg", width = 8, height = 5)
 
 
 ggplot(sa3_result[outcome == "Tax on Employees"]) +
@@ -199,7 +199,7 @@ ggplot(sa3_result[outcome == "Tax on Employees"]) +
     panel.grid.major.x = element_blank(),
     panel.grid.minor.x = element_blank()) +
   scale_fill_manual(values = c("#00b4d8","#bc6c25","#c1121f","#5e548e"))
-ggsave("output/FIG_SA3_consumption_category_IncTaxes.svg", width = 8, height = 6)
+ggsave("output/FIG_SA3_consumption_category_IncTaxes.svg", width = 8, height = 5)
 
 
 nrow(sa3_result[outcome == "Gross Value Added" & estimate_rel < 0 & policy == "(1) alcohol"])
