@@ -107,3 +107,4 @@ ggplot(sa1_result) +
     panel.grid.minor.x = element_blank()) +
   scale_fill_manual(values = c("#d4d700","#aacc00","#55a630","#007f5f"))
 ggsave("output/FIG_SA1_io_table.svg", width = 8, height = 6)
+ggsave("output/FIG_SA1_io_table.jpg", width = 8, height = 6)

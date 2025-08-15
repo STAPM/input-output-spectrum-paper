@@ -265,3 +265,4 @@ ggplot(sa2_result_bar_new) +
           # remove legend
     legend.position = "none")
 ggsave("output/FIG_SA2_break_evens.svg", width = 8, height = 6)
+ggsave("output/FIG_SA2_break_evens.jpg", width = 8, height = 6)
